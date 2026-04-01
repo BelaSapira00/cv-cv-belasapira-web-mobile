@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>CV Bela</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+:root {
+  --navy: #1e2a38;
+  --pink: #f8c8dc;
+  --pink-hover: #f4a6c1;
+  --bg: #fdf2f7;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+}
+
+/* NAVBAR */
+nav {
+  background: var(--navy);
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+nav h2 {
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  background: var(--pink);
+  color: var(--navy);
+}
+
+.active {
+  background: var(--pink);
+  color: var(--navy);
+}
+
+/* CONTENT */
+#content {
+  padding: 25px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* PROFILE */
+.profile {
+  width: 130px;
+  border-radius: 50%;
+  border: 4px solid var(--pink);
+  margin-bottom: 15px;
+}
+
+/* INPUT */
+input, textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--pink);
+}
+
+/* BUTTON */
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--navy);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: var(--pink);
+  color: var(--navy);
+}
+
+/* ERROR */
+small {
+  display: block;
+  text-align: left;
+  margin-top: 3px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px){
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <h2>My CV</h2>
+  <ul>
+    <li><a href="#" class="menu active" data-page="home.html">Home</a></li>
+    <li><a href="#" class="menu" data-page="about.html">About</a></li>
+    <li><a href="#" class="menu" data-page="contact.html">Contact</a></li>
+    <li><a href="#" class="menu" data-page="github.html">GitHub Info</a></li>
+    <li><a href="#" class="menu" data-page="skills.html">Skills</a></li>
+    <li><a href="#" class="menu" data-page="education.html">Education</a></li>
+    <li><a href="#" class="menu" data-page="experience.html">Experience</a></li>
+    <li><a href="#" class="menu" data-page="portfolio.html">Portfolio</a></li>
+    <li><a href="#" class="menu" data-page="certificate.html">Certificate</a></li>
+  </ul>
+</nav>
+
+<div id="content"></div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

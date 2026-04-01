@@ -1,0 +1,59 @@
+<div class="card">
+  <h2>Contact Me</h2>
+
+  <input type="text" id="nama" placeholder="Nama">
+  <small id="errNama"></small>
+
+  <input type="email" id="email" placeholder="Email">
+  <small id="errEmail"></small>
+
+  <textarea id="pesan" placeholder="Pesan"></textarea>
+  <small id="errPesan"></small>
+
+  <button id="kirim">Kirim Pesan</button>
+</div>
+
+<script>
+$(document).ready(function(){
+
+  $("#nama").val(localStorage.getItem("nama"));
+  $("#email").val(localStorage.getItem("email"));
+  $("#pesan").val(localStorage.getItem("pesan"));
+
+  $("#kirim").click(function(){
+
+    let nama = $("#nama").val();
+    let email = $("#email").val();
+    let pesan = $("#pesan").val();
+
+    let valid = true;
+
+    $("small").text("");
+
+    if(nama === ""){
+      $("#errNama").text("Nama wajib diisi").css("color","red");
+      valid = false;
+    }
+
+    if(!email.includes("@")){
+      $("#errEmail").text("Email tidak valid").css("color","red");
+      valid = false;
+    }
+
+    if(pesan.length < 5){
+      $("#errPesan").text("Pesan minimal 5 karakter").css("color","red");
+      valid = false;
+    }
+
+    if(valid){
+      localStorage.setItem("nama", nama);
+      localStorage.setItem("email", email);
+      localStorage.setItem("pesan", pesan);
+
+      alert("Pesan berhasil disimpan 💖");
+    }
+
+  });
+
+});
+</script>

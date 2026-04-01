@@ -1,0 +1,31 @@
+<div class="card">
+  <h2>GitHub Info</h2>
+
+  <div id="loading">Loading data...</div>
+  <div id="githubData"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+  let username = "octocat"; // ganti punya kamu
+
+  $.ajax({
+    url: "https://api.github.com/users/" + username,
+    success: function(data){
+      $("#loading").hide();
+
+      $("#githubData").html(`
+        <img src="${data.avatar_url}" class="profile">
+        <h3>${data.login}</h3>
+        <p>Followers: ${data.followers}</p>
+        <p>Public Repo: ${data.public_repos}</p>
+      `);
+    },
+    error: function(){
+      $("#loading").text("Gagal mengambil data 😢");
+    }
+  });
+
+});
+</script>
