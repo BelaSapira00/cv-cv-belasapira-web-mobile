@@ -11,7 +11,6 @@
 :root {
   --navy: #1e2a38;
   --pink: #f8c8dc;
-  --pink-hover: #f4a6c1;
   --bg: #fdf2f7;
 }
 
@@ -25,11 +24,10 @@ body {
 nav {
   background: var(--navy);
   color: white;
-  padding: 15px 25px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 nav h2 {
@@ -61,75 +59,63 @@ nav a:hover {
   color: var(--navy);
 }
 
+/* HAMBURGER */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 /* CONTENT */
 #content {
-  padding: 25px;
+  padding: 20px;
 }
 
 /* CARD */
 .card {
   background: white;
-  padding: 25px;
+  padding: 20px;
   border-radius: 15px;
   max-width: 600px;
   margin: auto;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-/* PROFILE */
-.profile {
-  width: 130px;
-  border-radius: 50%;
-  border: 4px solid var(--pink);
-  margin-bottom: 15px;
-}
-
-/* INPUT */
-input, textarea {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-input:focus, textarea:focus {
-  border-color: var(--pink);
-}
-
-/* BUTTON */
-button {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: var(--navy);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: var(--pink);
-  color: var(--navy);
-}
-
-/* ERROR */
-small {
-  display: block;
-  text-align: left;
-  margin-top: 3px;
-}
-
-/* RESPONSIVE */
+/* MOBILE */
 @media (max-width: 600px){
+
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
   nav ul {
+    display: none;
     flex-direction: column;
     width: 100%;
+    background: var(--navy);
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    animation: slideDown 0.3s ease;
+  }
+
+  nav ul li {
+    margin: 5px 0;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  @keyframes slideDown {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
   }
 }
 </style>
@@ -139,11 +125,15 @@ small {
 
 <nav>
   <h2>My CV</h2>
-  <ul>
+
+  <!-- 🔥 HAMBURGER -->
+  <div class="menu-toggle">☰</div>
+
+  <ul id="navMenu">
     <li><a href="#" class="menu active" data-page="home.html">Home</a></li>
     <li><a href="#" class="menu" data-page="about.html">About</a></li>
     <li><a href="#" class="menu" data-page="contact.html">Contact</a></li>
-    <li><a href="#" class="menu" data-page="github.html">GitHub Info</a></li>
+    <li><a href="#" class="menu" data-page="github.html">GitHub</a></li>
     <li><a href="#" class="menu" data-page="skills.html">Skills</a></li>
     <li><a href="#" class="menu" data-page="education.html">Education</a></li>
     <li><a href="#" class="menu" data-page="experience.html">Experience</a></li>
@@ -154,7 +144,7 @@ small {
 
 <div id="content"></div>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
