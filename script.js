@@ -8,24 +8,14 @@ $(document).ready(function () {
     });
   }
 
-  // 🔥 load pertama (home)
   loadPage("home.html");
 
-  // 🔥 klik menu
   $(".menu").click(function () {
     $(".menu").removeClass("active");
     $(this).addClass("active");
 
     let page = $(this).data("page");
     loadPage(page);
-
-    // 🔥 auto close menu di HP
-    $("#navMenu").removeClass("show");
-  });
-
-  // 🔥 hamburger toggle
-  $(".menu-toggle").click(function () {
-    $("#navMenu").toggleClass("show");
   });
 
 });
