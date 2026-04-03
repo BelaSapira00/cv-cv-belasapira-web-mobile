@@ -8,7 +8,7 @@
 <script>
 $(document).ready(function(){
 
-  let username = "BelaSapira00"; // ganti punya kamu
+  let username = "BelaSapira00"; // 🔥 ganti ini
 
   $.ajax({
     url: "https://api.github.com/users/" + username,
@@ -17,9 +17,12 @@ $(document).ready(function(){
 
       $("#githubData").html(`
         <img src="${data.avatar_url}" class="profile">
-        <h3>${data.login}</h3>
+        <h3>${data.name ?? data.login}</h3>
+        <p>@${data.login}</p>
+        <p>${data.bio ?? "Tidak ada bio"}</p>
         <p>Followers: ${data.followers}</p>
         <p>Public Repo: ${data.public_repos}</p>
+        <a href="${data.html_url}" target="_blank">Lihat GitHub</a>
       `);
     },
     error: function(){
