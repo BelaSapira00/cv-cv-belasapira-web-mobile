@@ -125,13 +125,40 @@ small {
   margin-top: 3px;
 }
 
-/* RESPONSIVE */
+/* default (desktop) */
+nav ul {
+  display: flex;
+  gap: 15px;
+}
+
+/* tombol hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MOBILE */
 @media (max-width: 600px){
+
+  .menu-toggle {
+    display: block;
+  }
+
   nav ul {
+    display: none; /* 🔥 disembunyiin dulu */
     flex-direction: column;
     width: 100%;
+    background: #1e2a38;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  nav ul.show {
+    display: flex; /* 🔥 muncul saat diklik */
   }
 }
+
 </style>
 
 </head>
@@ -139,6 +166,7 @@ small {
 
 <nav>
   <h2>My CV</h2>
+  <div class="menu-toggle">☰</div>
   <ul>
     <li><a href="#" class="menu active" data-page="home.html">Home</a></li>
     <li><a href="#" class="menu" data-page="about.html">About</a></li>
