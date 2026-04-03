@@ -3,10 +3,10 @@ $(document).ready(function () {
   function loadPage(page) {
     console.log("Load:", page);
 
-    $("#content").hide().load("./" + page, function (response, status) {
+    $("#content").hide().load(page, function (response, status) {
 
       if (status === "error") {
-        $("#content").html("<h3 style='color:red'>File tidak ditemukan 😢</h3>");
+        $("#content").html("<h3 style='color:red'>File " + page + " tidak ditemukan 😢</h3>");
       } else {
         $("#content").fadeIn(200);
       }
@@ -14,10 +14,10 @@ $(document).ready(function () {
     });
   }
 
-  // 🔥 load awal
+  // 🔥 LOAD HOME PERTAMA
   loadPage("home.html");
 
-  // 🔥 klik menu (ANTI ERROR SPA)
+  // 🔥 EVENT MENU (ANTI ERROR)
   $(document).on("click", ".menu", function (e) {
     e.preventDefault();
 
@@ -30,7 +30,7 @@ $(document).ready(function () {
     $("#navMenu").removeClass("show");
   });
 
-  // 🔥 hamburger
+  // 🔥 HAMBURGER
   $(document).on("click", ".menu-toggle", function () {
     $("#navMenu").toggleClass("show");
   });
