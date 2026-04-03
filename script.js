@@ -12,10 +12,10 @@ $(document).ready(function () {
     });
   }
 
-  // 🔥 pertama buka langsung home
+  // 🔥 load awal
   loadPage("home.html");
 
-  // 🔥 klik menu
+  // 🔥 FIX EVENT (INI YANG PENTING BANGET)
   $(document).on("click", ".menu", function (e) {
     e.preventDefault();
 
@@ -25,12 +25,11 @@ $(document).ready(function () {
     let page = $(this).data("page");
     loadPage(page);
 
-    // 🔥 tutup menu HP
     $("#navMenu").removeClass("show");
   });
 
   // 🔥 hamburger
-  $(".menu-toggle").click(function () {
+  $(document).on("click", ".menu-toggle", function () {
     $("#navMenu").toggleClass("show");
   });
 
