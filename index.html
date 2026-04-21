@@ -5,83 +5,92 @@
 <title>CV Bela</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
 :root {
   --navy: #1e2a38;
-  --pink: #f8c8dc;
-  --pink-hover: #f4a6c1;
-  --bg: #fdf2f7;
+  --accent: #e9a6c3;
+  --accent-soft: #f6d4e2;
+  --bg: #f8f9fb;
+  --text: #2d2d2d;
 }
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--bg);
+  color: var(--text);
 }
 
 /* NAVBAR */
 nav {
-  background: var(--navy);
-  color: white;
-  padding: 15px 25px;
+  background: white;
+  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  z-index: 100;
 }
 
 nav h2 {
   margin: 0;
+  color: var(--navy);
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 15px;
+  gap: 20px;
   padding: 0;
 }
 
 nav a {
-  color: white;
+  color: var(--navy);
   text-decoration: none;
+  font-weight: 500;
   padding: 6px 10px;
   border-radius: 6px;
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 nav a:hover {
-  background: var(--pink);
-  color: var(--navy);
+  background: var(--accent-soft);
 }
 
 .active {
-  background: var(--pink);
-  color: var(--navy);
+  background: var(--accent);
+  color: white;
 }
 
 /* CONTENT */
 #content {
-  padding: 25px;
+  padding: 40px 20px;
 }
 
 /* CARD */
 .card {
   background: white;
-  padding: 25px;
-  border-radius: 15px;
-  max-width: 600px;
+  padding: 30px;
+  border-radius: 18px;
+  max-width: 650px;
   margin: auto;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  animation: fadeIn 0.5s ease;
 }
 
 /* PROFILE */
 .profile {
   width: 130px;
   border-radius: 50%;
-  border: 4px solid var(--pink);
+  border: 4px solid var(--accent);
   margin-bottom: 15px;
 }
 
@@ -91,12 +100,13 @@ input, textarea {
   margin-top: 10px;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   outline: none;
+  font-family: inherit;
 }
 
 input:focus, textarea:focus {
-  border-color: var(--pink);
+  border-color: var(--accent);
 }
 
 /* BUTTON */
@@ -108,30 +118,28 @@ button {
   border: none;
   background: var(--navy);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
 
 button:hover {
-  background: var(--pink);
-  color: var(--navy);
+  background: var(--accent);
 }
 
-/* ERROR */
-small {
-  display: block;
-  text-align: left;
-  margin-top: 3px;
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* default (desktop) */
-nav ul {
-  display: flex;
-  gap: 15px;
-}
-
-/* tombol hamburger */
+/* HAMBURGER */
 .menu-toggle {
   display: none;
   font-size: 26px;
@@ -139,39 +147,40 @@ nav ul {
 }
 
 /* MOBILE */
-@media (max-width: 600px){
+@media (max-width: 768px){
 
   .menu-toggle {
     display: block;
   }
 
   nav ul {
-    display: none; /* 🔥 disembunyiin dulu */
+    display: none;
     flex-direction: column;
     width: 100%;
-    background: #1e2a38;
-    margin-top: 10px;
-    padding: 10px;
+    background: white;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
   }
 
   nav ul.show {
-    display: flex; /* 🔥 muncul saat diklik */
+    display: flex;
   }
 }
-
 </style>
-
 </head>
+
 <body>
 
 <nav>
-  <h2>My CV</h2>
+  <h2>Bela.dev</h2>
   <div class="menu-toggle">☰</div>
   <ul>
     <li><a href="#" class="menu active" data-page="home.html">Home</a></li>
     <li><a href="#" class="menu" data-page="about.html">About</a></li>
     <li><a href="#" class="menu" data-page="contact.html">Contact</a></li>
-    <li><a href="#" class="menu" data-page="github.html">GitHub Info</a></li>
+    <li><a href="#" class="menu" data-page="github.html">GitHub</a></li>
     <li><a href="#" class="menu" data-page="skills.html">Skills</a></li>
     <li><a href="#" class="menu" data-page="education.html">Education</a></li>
     <li><a href="#" class="menu" data-page="experience.html">Experience</a></li>
@@ -181,6 +190,19 @@ nav ul {
 </nav>
 
 <div id="content"></div>
+
+<script>
+$(".menu-toggle").click(function(){
+  $("nav ul").toggleClass("show");
+});
+
+$(".menu").click(function(){
+  $(".menu").removeClass("active");
+  $(this).addClass("active");
+
+  $("nav ul").removeClass("show"); // auto close mobile menu
+});
+</script>
 
 <script src="script.js"></script>
 
