@@ -1,34 +1,33 @@
-<div class="card">
-  <h2>GitHub Info</h2>
-
-  <div id="loading">Loading data...</div>
-  <div id="githubData"></div>
-</div>
-
-<script>
 $(document).ready(function(){
 
-  let username = "BelaSapira00"; // 🔥 ganti ini
+  let username = "BelaSapira00";
+
+  $("#loading").show();
 
   $.ajax({
     url: "https://api.github.com/users/" + username,
+    method: "GET",
     success: function(data){
       $("#loading").hide();
 
       $("#githubData").html(`
         <img src="${data.avatar_url}" class="profile">
-        <h3>${data.name ?? data.login}</h3>
+        <h3>${data.name || data.login}</h3>
         <p>@${data.login}</p>
-        <p>${data.bio ?? "Tidak ada bio"}</p>
+        <p>${data.bio || "Tidak ada bio"}</p>
         <p>Followers: ${data.followers}</p>
         <p>Public Repo: ${data.public_repos}</p>
         <a href="${data.html_url}" target="_blank">Lihat GitHub</a>
       `);
     },
-    error: function(){
-      $("#loading").text("Gagal mengambil data 😢");
+    error: function(xhr){
+      console.log(xhr);
+
+      $("#loading").html(`
+        Gagal mengambil data 😢<br>
+        <small>Status: ${xhr.status}</small>
+      `);
     }
   });
 
 });
-</script>
