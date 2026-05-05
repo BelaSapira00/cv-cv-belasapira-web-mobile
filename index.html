@@ -1,210 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<title>CV Bela</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0d6efd" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta charset="UTF-8" />
+    <title>CV Bela</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- FONT -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- FONT -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet" />
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(() => console.log("Service Worker registered"))
+          .catch((err) => console.log("SW failed:", err));
+      }
+    </script>
 
-<style>
-:root {
-  --navy: #1e2a38;
-  --accent: #e9a6c3;
-  --accent-soft: #f6d4e2;
-  --bg: #f8f9fb;
-  --text: #2d2d2d;
-}
+    <style>
+      :root {
+        --navy: #1e2a38;
+        --accent: #e9a6c3;
+        --accent-soft: #f6d4e2;
+        --bg: #f8f9fb;
+        --text: #2d2d2d;
+      }
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
 
-/* NAVBAR */
-nav {
-  background: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  z-index: 100;
-}
+      /* NAVBAR */
+      nav {
+        background: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        z-index: 100;
+      }
 
-nav h2 {
-  margin: 0;
-  color: var(--navy);
-}
+      nav h2 {
+        margin: 0;
+        color: var(--navy);
+      }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  padding: 0;
-}
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding: 0;
+      }
 
-nav a {
-  color: var(--navy);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: 0.25s;
-}
+      nav a {
+        color: var(--navy);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: 0.25s;
+      }
 
-nav a:hover {
-  background: var(--accent-soft);
-}
+      nav a:hover {
+        background: var(--accent-soft);
+      }
 
-.active {
-  background: var(--accent);
-  color: white;
-}
+      .active {
+        background: var(--accent);
+        color: white;
+      }
 
-/* CONTENT */
-#content {
-  padding: 40px 20px;
-}
+      /* CONTENT */
+      #content {
+        padding: 40px 20px;
+      }
 
-/* CARD */
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 18px;
-  max-width: 650px;
-  margin: auto;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-  animation: fadeIn 0.5s ease;
-}
+      /* CARD */
+      .card {
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        max-width: 650px;
+        margin: auto;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        animation: fadeIn 0.5s ease;
+      }
 
-/* PROFILE */
-.profile {
-  width: 130px;
-  border-radius: 50%;
-  border: 4px solid var(--accent);
-  margin-bottom: 15px;
-}
+      /* PROFILE */
+      .profile {
+        width: 130px;
+        border-radius: 50%;
+        border: 4px solid var(--accent);
+        margin-bottom: 15px;
+      }
 
-/* INPUT */
-input, textarea {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  outline: none;
-  font-family: inherit;
-}
+      /* INPUT */
+      input,
+      textarea {
+        width: 100%;
+        margin-top: 10px;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        outline: none;
+        font-family: inherit;
+      }
 
-input:focus, textarea:focus {
-  border-color: var(--accent);
-}
+      input:focus,
+      textarea:focus {
+        border-color: var(--accent);
+      }
 
-/* BUTTON */
-button {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: var(--navy);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-}
+      /* BUTTON */
+      button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background: var(--navy);
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
 
-button:hover {
-  background: var(--accent);
-}
+      button:hover {
+        background: var(--accent);
+      }
 
-/* ANIMATION */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+      /* ANIMATION */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-/* HAMBURGER */
-.menu-toggle {
-  display: none;
-  font-size: 26px;
-  cursor: pointer;
-}
+      /* HAMBURGER */
+      .menu-toggle {
+        display: none;
+        font-size: 26px;
+        cursor: pointer;
+      }
 
-/* MOBILE */
-@media (max-width: 768px){
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
 
-  .menu-toggle {
-    display: block;
-  }
+        nav ul {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          background: white;
+          margin-top: 15px;
+          padding: 15px;
+          border-radius: 12px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
 
-  nav ul {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: white;
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-  }
+        nav ul.show {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
 
-  nav ul.show {
-    display: flex;
-  }
-}
-</style>
-</head>
+  <body>
+    <nav>
+      <h2>CV Bela Sapira</h2>
+      <br />
+      <div class="menu-toggle">☰</div>
+      <ul>
+        <li><a href="#" class="menu active" data-page="home.html">Home</a></li>
+        <li><a href="#" class="menu" data-page="about.html">About</a></li>
+        <li><a href="#" class="menu" data-page="contact.html">Contact</a></li>
+        <li><a href="#" class="menu" data-page="github.html">GitHub</a></li>
+        <li><a href="#" class="menu" data-page="skills.html">Skills</a></li>
+        <li>
+          <a href="#" class="menu" data-page="education.html">Education</a>
+        </li>
+        <li>
+          <a href="#" class="menu" data-page="experience.html">Experience</a>
+        </li>
+        <li>
+          <a href="#" class="menu" data-page="portfolio.html">Portfolio</a>
+        </li>
+        <li>
+          <a href="#" class="menu" data-page="certificate.html">Certificate</a>
+        </li>
+      </ul>
+    </nav>
 
-<body>
+    <div id="content"></div>
 
-<nav>
-  <h2>CV Bela Sapira</h2><br>
-  <div class="menu-toggle">☰</div>
-  <ul>
-    <li><a href="#" class="menu active" data-page="home.html">Home</a></li>
-    <li><a href="#" class="menu" data-page="about.html">About</a></li>
-    <li><a href="#" class="menu" data-page="contact.html">Contact</a></li>
-    <li><a href="#" class="menu" data-page="github.html">GitHub</a></li>
-    <li><a href="#" class="menu" data-page="skills.html">Skills</a></li>
-    <li><a href="#" class="menu" data-page="education.html">Education</a></li>
-    <li><a href="#" class="menu" data-page="experience.html">Experience</a></li>
-    <li><a href="#" class="menu" data-page="portfolio.html">Portfolio</a></li>
-    <li><a href="#" class="menu" data-page="certificate.html">Certificate</a></li>
-  </ul>
-</nav>
+    <script>
+      $(".menu-toggle").click(function () {
+        $("nav ul").toggleClass("show");
+      });
 
-<div id="content"></div>
+      $(".menu").click(function () {
+        $(".menu").removeClass("active");
+        $(this).addClass("active");
 
-<script>
-$(".menu-toggle").click(function(){
-  $("nav ul").toggleClass("show");
-});
+        $("nav ul").removeClass("show"); // auto close mobile menu
+      });
+    </script>
 
-$(".menu").click(function(){
-  $(".menu").removeClass("active");
-  $(this).addClass("active");
-
-  $("nav ul").removeClass("show"); // auto close mobile menu
-});
-</script>
-
-<script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
