@@ -1,4 +1,4 @@
-const CACHE_NAME = "cv-pwa-v1";
+const CACHE_NAME = "cv-pwa-v3";
 const urlsToCache = ["/", "/index.html"];
 
 self.addEventListener("install", (event) => {
