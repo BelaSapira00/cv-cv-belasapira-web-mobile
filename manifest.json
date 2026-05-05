@@ -1,10 +1,11 @@
 {
-  "name": "CV Belasapira",
-  "short_name": "CV Saya",
+  "name": "CV Bela Sapira",
+  "short_name": "CV Bela",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0d6efd",
+  "background_color": "#f8f9fb",
+  "theme_color": "#e9a6c3",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/icon-192.png",
