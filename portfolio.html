@@ -1,15 +1,234 @@
 <div class="card">
-  <h2>Portfolio</h2>
-  <ul>
-    <li>
-      <strong>CRUD Web Application</strong><br>
-      <span>Aplikasi manajemen data berbasis PHP & MySQL.</span><br>
-      <a href="#" target="_blank">View Project</a>
-    </li>
-    <li>
-      <strong>Online CV Website</strong><br>
-      <span>Website CV responsif untuk personal branding.</span><br>
-      <a href="#" target="_blank">View Project</a>
-    </li>
-  </ul>
+
+  <h2>
+    My Portfolio 🚀
+  </h2>
+
+  <div class="project-box">
+
+    <h3>
+      CRUD Web Application
+    </h3>
+
+    <p>
+      Aplikasi manajemen data berbasis
+      PHP & MySQL yang digunakan untuk
+      mengelola data secara efisien
+      dengan fitur tambah, edit,
+      hapus, dan pencarian data.
+    </p>
+
+    <a 
+      href="#"
+      target="_blank"
+      class="btn-project"
+    >
+      View Project
+    </a>
+
+  </div>
+
+
+
+  <div class="project-box">
+
+    <h3>
+      Online CV Website
+    </h3>
+
+    <p>
+      Website CV responsif untuk
+      personal branding yang dibuat
+      menggunakan HTML, CSS,
+      JavaScript, dan jQuery.
+    </p>
+
+    <a 
+      href="#"
+      target="_blank"
+      class="btn-project"
+    >
+      View Project
+    </a>
+
+  </div>
+
+
+
+  <div class="project-box special">
+
+    <h3>
+      Smart Campus Bela 📚
+    </h3>
+
+    <p>
+      Aplikasi Smart Campus berbasis
+      Progressive Web App (PWA)
+      dengan fitur login, jadwal kuliah,
+      tugas, notifikasi, dashboard,
+      mobile responsive, dan install app.
+    </p>
+
+    <p class="tech">
+      Tech Stack:
+      HTML, CSS, JavaScript,
+      jQuery, PWA, Vercel
+    </p>
+
+    <a 
+      href="https://smart-campus-bela.vercel.app/login.html"
+      target="_blank"
+      class="btn-project"
+    >
+      Open Smart Campus
+    </a>
+
+  </div>
+
 </div>
+
+
+
+<style>
+
+.card{
+
+  background:white;
+
+  padding:25px;
+
+  border-radius:20px;
+
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+}
+
+
+
+/* TITLE */
+.card h2{
+
+  text-align:center;
+
+  color:#1e2a38;
+
+  margin-bottom:25px;
+
+}
+
+
+
+/* PROJECT */
+.project-box{
+
+  background:#fdf2f7;
+
+  padding:20px;
+
+  border-radius:15px;
+
+  margin-bottom:20px;
+
+  border-left:6px solid #f8c8dc;
+
+  transition:0.3s;
+
+}
+
+.project-box:hover{
+
+  transform:translateY(-5px);
+
+}
+
+
+
+/* SPECIAL PROJECT */
+.special{
+
+  border-left:6px solid #1e2a38;
+
+  background:#ffeaf3;
+
+}
+
+
+
+/* TITLE PROJECT */
+.project-box h3{
+
+  color:#1e2a38;
+
+  margin-bottom:10px;
+
+}
+
+
+
+/* TEXT */
+.project-box p{
+
+  line-height:1.7;
+
+  margin-bottom:10px;
+
+}
+
+
+
+/* TECH */
+.tech{
+
+  font-size:14px;
+
+  color:#555;
+
+  font-style:italic;
+
+}
+
+
+
+/* BUTTON */
+.btn-project{
+
+  display:inline-block;
+
+  margin-top:10px;
+
+  padding:10px 18px;
+
+  background:#1e2a38;
+
+  color:white;
+
+  text-decoration:none;
+
+  border-radius:10px;
+
+  transition:0.3s;
+
+}
+
+.btn-project:hover{
+
+  background:#f8c8dc;
+
+  color:#1e2a38;
+
+}
+
+
+
+/* MOBILE */
+@media(max-width:600px){
+
+  .project-box{
+
+    padding:15px;
+
+  }
+
+}
+
+</style>
