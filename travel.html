@@ -1,124 +1,279 @@
 <div class="card">
-  <h2>Smart Travel Weather 🌍</h2>
 
-  <input type="text" id="cityInput" placeholder="Masukkan kota tujuan">
-  <button onclick="cekPerjalanan()">Cek Perjalanan</button>
+  <h2>
+    Smart Travel Weather 🌍
+  </h2>
+
+  <input 
+    type="text" 
+    id="cityInput" 
+    placeholder="Masukkan kota tujuan"
+  >
+
+  <button onclick="cekPerjalanan()">
+    Cek Perjalanan
+  </button>
 
   <div id="result" style="margin-top:20px;"></div>
+
 </div>
 
-<script>
-const apiKey = "37b24d9e047da41f7431081bc976f1ae";
-const ORS_KEY = "ISI_API_ORS_KAMU"; // WAJIB kalau mau Level 10
 
-async function cekPerjalanan() {
-  const city = document.getElementById("cityInput").value;
-  const result = document.getElementById("result");
 
-  if (!city) {
-    result.innerHTML = "⚠️ Isi dulu kotanya ya!";
-    return;
-  }
+<style>
 
-  result.innerHTML = "⏳ Loading...";
-
-  try {
-    // 🌍 1. GEO
-    const geoRes = await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
-    );
-    const geoData = await geoRes.json();
-
-    if (geoData.length === 0) {
-      result.innerHTML = "❌ Kota tidak ditemukan";
-      return;
-    }
-
-    const lat = geoData[0].lat;
-    const lon = geoData[0].lon;
-
-    // 🚗 2. ROUTE
-    const start = [107.6191, -6.9175]; // Bandung
-    const end = [lon, lat];
-
-    const routeRes = await fetch(
-      "https://api.openrouteservice.org/v2/directions/driving-car",
-      {
-        method: "POST",
-        headers: {
-          Authorization: ORS_KEY,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          coordinates: [start, end],
-        }),
-      }
-    );
-
-    const routeData = await routeRes.json();
-
-    // 🔥 HANDLE ERROR BIAR NGGAK CRASH
-    if (!routeData.features) {
-      throw new Error("Route API gagal / API key salah");
-    }
-
-    const duration = routeData.features[0].properties.summary.duration;
-    const hours = Math.floor(duration / 3600);
-
-    // ⏱️ 3. WAKTU TIBA
-    const now = new Date();
-    const arrival = new Date(now.getTime() + duration * 1000);
-
-    // 🌦️ 4. WEATHER
-    const weatherRes = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=id`
-    );
-    const weatherData = await weatherRes.json();
-
-    if (!weatherData.list) {
-      throw new Error("Weather API gagal");
-    }
-
-    let selected = weatherData.list[0];
-
-    for (let item of weatherData.list) {
-      const forecastTime = new Date(item.dt * 1000);
-      if (forecastTime >= arrival) {
-        selected = item;
-        break;
-      }
-    }
-
-    const kondisi = selected.weather[0].main;
-    const suhu = Math.round(selected.main.temp);
-
-    // 🧠 5. DECISION
-    let rekomendasi = "Aman 👍";
-
-    if (kondisi.toLowerCase().includes("rain")) {
-      rekomendasi = "🌧️ Bawa jas hujan!";
-    } else if (kondisi.toLowerCase().includes("cloud")) {
-      rekomendasi = "☁️ Mendung, siap-siap ya";
-    } else if (kondisi.toLowerCase().includes("clear")) {
-      rekomendasi = "☀️ Cuaca cerah, gaskeun!";
-    }
-
-    // 🎯 OUTPUT
-    result.innerHTML = `
-      <h3>Hasil Perjalanan</h3>
-      <p>⏱️ Durasi: ${hours} jam</p>
-      <p>🌡️ Suhu: ${suhu}°C</p>
-      <p>🌦️ Cuaca saat tiba: ${kondisi}</p>
-      <p><b>${rekomendasi}</b></p>
-    `;
-
-  } catch (error) {
-    console.error(error);
-
-    result.innerHTML = `
-      ❌ Error terjadi <br>
-      <small>${error.message}</small>
-    `;
-  }
+#cityInput{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  margin-top:15px;
+  outline:none;
 }
+
+button{
+  margin-top:15px;
+  padding:12px 20px;
+  border:none;
+  border-radius:12px;
+  background:#1e2a38;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button:hover{
+  background:#f8c8dc;
+  color:#1e2a38;
+}
+
+.weather-box{
+  background:#fdf2f7;
+  padding:15px;
+  border-radius:15px;
+  margin-top:15px;
+  line-height:1.8;
+}
+
+</style>
+
+
+
+<script>
+
+// 🌍 GEO API
+async function getCoordinates(city){
+
+  const response = await fetch(
+    `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=id&format=json`
+  );
+
+  const data = await response.json();
+
+  if(!data.results){
+    return null;
+  }
+
+  return {
+    lat: data.results[0].latitude,
+    lon: data.results[0].longitude,
+    name: data.results[0].name,
+    country: data.results[0].country
+  };
+
+}
+
+
+
+// 🌦️ WEATHER API
+async function getWeather(lat,lon){
+
+  const response = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m&timezone=Asia%2FBangkok`
+  );
+
+  return await response.json();
+
+}
+
+
+
+// 🎯 WEATHER CODE
+function getWeatherDescription(code){
+
+  if(code == 0){
+    return "☀️ Cerah";
+  }
+
+  else if(code <= 3){
+    return "☁️ Berawan";
+  }
+
+  else if(code <= 48){
+    return "🌫️ Berkabut";
+  }
+
+  else if(code <= 67){
+    return "🌧️ Hujan";
+  }
+
+  else if(code <= 77){
+    return "❄️ Salju";
+  }
+
+  else if(code <= 99){
+    return "⛈️ Badai";
+  }
+
+  return "🌍 Cuaca tidak diketahui";
+
+}
+
+
+
+// 🚀 MAIN FUNCTION
+async function cekPerjalanan(){
+
+  const city = document.getElementById(
+    "cityInput"
+  ).value;
+
+  const result = document.getElementById(
+    "result"
+  );
+
+
+
+  if(city == ""){
+
+    result.innerHTML = `
+      <p>
+        ⚠️ Masukkan nama kota dulu ya
+      </p>
+    `;
+
+    return;
+
+  }
+
+
+
+  result.innerHTML = `
+    <p>
+      ⏳ Sedang mencari cuaca...
+    </p>
+  `;
+
+
+
+  try{
+
+    // GEO
+    const lokasi = await getCoordinates(
+      city
+    );
+
+
+
+    if(!lokasi){
+
+      result.innerHTML = `
+        <p>
+          ❌ Kota tidak ditemukan
+        </p>
+      `;
+
+      return;
+
+    }
+
+
+
+    // WEATHER
+    const weather = await getWeather(
+      lokasi.lat,
+      lokasi.lon
+    );
+
+
+
+    const suhu =
+      weather.current.temperature_2m;
+
+    const angin =
+      weather.current.wind_speed_10m;
+
+    const code =
+      weather.current.weather_code;
+
+
+
+    const kondisi =
+      getWeatherDescription(code);
+
+
+
+    // REKOMENDASI
+    let rekomendasi =
+      "✨ Cuaca aman buat perjalanan";
+
+
+
+    if(code >= 51){
+
+      rekomendasi =
+        "🌧️ Jangan lupa bawa payung atau jas hujan";
+
+    }
+
+
+
+    // OUTPUT
+    result.innerHTML = `
+
+      <div class="weather-box">
+
+        <h3>
+          📍 ${lokasi.name}, ${lokasi.country}
+        </h3>
+
+        <p>
+          🌡️ Suhu: 
+          <b>${suhu}°C</b>
+        </p>
+
+        <p>
+          🌦️ Kondisi: 
+          <b>${kondisi}</b>
+        </p>
+
+        <p>
+          💨 Kecepatan angin: 
+          <b>${angin} km/j</b>
+        </p>
+
+        <p>
+          🎯 ${rekomendasi}
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+  catch(error){
+
+    console.log(error);
+
+    result.innerHTML = `
+      <p>
+        ❌ Terjadi error
+      </p>
+    `;
+
+  }
+
+}
+
 </script>
